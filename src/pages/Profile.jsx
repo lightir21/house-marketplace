@@ -3,7 +3,6 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate, Link } from "react-router-dom";
-import { async } from "@firebase/util";
 import { toast } from "react-toastify";
 
 const Profile = () => {
