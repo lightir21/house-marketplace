@@ -12,7 +12,6 @@ import {
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
-import { async } from "@firebase/util";
 
 const Category = () => {
   const [listings, setListings] = useState(null);
@@ -53,9 +52,35 @@ const Category = () => {
       }
     };
     fetchListings();
-  }, []);
+  }, [params.categoryName]);
 
-  return <div>Category</div>;
+  return (
+    <div className="category">
+      <header>
+        <p className="pageHeader">
+          {params.categoryName === "rent"
+            ? "Places for rent"
+            : "Places for sale"}
+        </p>
+      </header>
+
+      {loading ? (
+        <Spinner />
+      ) : listings && listings.length > 0 ? (
+        <>
+          <main>
+            <ul className="categoryListings">
+              {listings.map((listing) => (
+                <h3>{listing.data.name}</h3>
+              ))}
+            </ul>
+          </main>
+        </>
+      ) : (
+        <p>No listing for {params.categoryName}</p>
+      )}
+    </div>
+  );
 };
 
 export default Category;
